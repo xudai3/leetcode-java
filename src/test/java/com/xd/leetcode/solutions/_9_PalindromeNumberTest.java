@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class _9_PalindromeNumberTest {
 
-    public HashMap<Integer, Boolean> testCases = new HashMap<>();
-    public void InitTestCases() {
+    private HashMap<Integer, Boolean> testCases = new HashMap<>();
+    public _9_PalindromeNumberTest() {
         this.testCases.put(121,true);
         this.testCases.put(-121,false);
         this.testCases.put(10,false);
@@ -19,8 +19,6 @@ public class _9_PalindromeNumberTest {
 
     @Test
     public void isPalindromeTest() {
-        InitTestCases();
-
         _9_PalindromeNumber pn = new _9_PalindromeNumber();
         for (Map.Entry<Integer, Boolean> entry: this.testCases.entrySet())
             assertEquals(pn.isPalindrome(entry.getKey()), entry.getValue());
@@ -28,8 +26,6 @@ public class _9_PalindromeNumberTest {
 
     @Test
     public void isPalindrome2Test() {
-        InitTestCases();
-
         _9_PalindromeNumber pn = new _9_PalindromeNumber();
         for (Map.Entry<Integer, Boolean> entry: this.testCases.entrySet())
             assertEquals(pn.isPalindrome2(entry.getKey()), entry.getValue());
