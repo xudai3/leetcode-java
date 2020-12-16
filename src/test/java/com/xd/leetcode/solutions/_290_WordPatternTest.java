@@ -20,9 +20,15 @@ class _290_WordPatternTest {
         testCases.expect = new boolean[]{true, false, false, false};
     }
     @Test
-    void wordPattern() {
+    void wordPatternOneMap() {
         for (int i = 0; i < testCases.pattern.length; i++) {
-            assertEquals(testCases.expect[i], w.wordPattern(testCases.pattern[i], testCases.str[i]));
+            assertEquals(testCases.expect[i], w.wordPatternOneMap(testCases.pattern[i], testCases.str[i]));
+        }
+    }
+    @Test
+    void wordPatternTwoMap() {
+        for (int i = 0; i < testCases.pattern.length; i++) {
+            assertEquals(testCases.expect[i], w.wordPatternTwoMap(testCases.pattern[i], testCases.str[i]));
         }
     }
 }
