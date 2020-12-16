@@ -26,18 +26,27 @@ class _49_GroupAnagramsTest {
     }
 
     @Test
-    void groupAnagrams() {
+    void groupAnagramsSortHash() {
         for (TestCases tc : testCases) {
-            List<List<String>> result = g.groupAnagrams(tc.input);
+            List<List<String>> result = g.groupAnagramsSortHash(tc.input);
+            System.out.println(result.toString());
+        }
+    }
+
+
+    @Test
+    void groupAnagramsCountHash() {
+        for (TestCases tc : testCases) {
+            List<List<String>> result = g.groupAnagramsCountHash(tc.input);
             System.out.println(result.toString());
         }
     }
 
     @Test
-    void getHash() {
+    void getHashKey() {
         for (TestCases tc : testCases) {
             for (String str : tc.input) {
-                System.out.println(g.getHash(str));
+                System.out.println(g.getHashKey(str));
             }
         }
     }

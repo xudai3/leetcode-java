@@ -1,9 +1,6 @@
 package com.xd.leetcode.solutions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -27,23 +24,49 @@ import java.util.Map;
  */
 
 public class _49_GroupAnagrams {
-    public List<List<String>> groupAnagrams(String[] strs) {
+
+    /**
+     *
+     * "eat", "tea", "ate" 排序之后都是"aet"，将排序后的字符串作为hash key
+     *
+     */
+    public List<List<String>> groupAnagramsSortHash(String[] strs) {
         Map<String, List<String>> hash = new HashMap<>();
         for (String str : strs) {
-            String key = getHash(str);
-            if (hash.containsKey(key)) {
-                List<String> val = hash.get(key);
-                val.add(str);
-            } else {
-                List<String> val = new ArrayList<>();
-                val.add(str);
-                hash.put(key, val);
-            }
+            char[] strChars = str.toCharArray();
+            Arrays.sort(strChars);
+            String sortedStr = new String(strChars);
+            checkHash(hash, str, sortedStr);
         }
         return new ArrayList<>(hash.values());
     }
 
-    public String getHash(String str) {
+    /**
+     *
+     * "eat", "tea", "ate" 对每个字母出现的次数进行计数，编码在一起成字符串"a1e1t1"，将该字符串作为hash key
+     *
+     */
+    public List<List<String>> groupAnagramsCountHash(String[] strs) {
+        Map<String, List<String>> hash = new HashMap<>();
+        for (String str : strs) {
+            String key = getHashKey(str);
+            checkHash(hash, str, key);
+        }
+        return new ArrayList<>(hash.values());
+    }
+
+    public void checkHash(Map<String, List<String>> hash, String str, String key) {
+        if (hash.containsKey(key)) {
+            List<String> val = hash.get(key);
+            val.add(str);
+        } else {
+            List<String> val = new ArrayList<>();
+            val.add(str);
+            hash.put(key, val);
+        }
+    }
+
+    public String getHashKey(String str) {
         int[] counter = new int[26];
         for (int i = 0; i < str.length(); i++) {
             counter[str.charAt(i) - 'a']++;
