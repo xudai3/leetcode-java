@@ -21,4 +21,10 @@ public class _402_RemoveKDigitsTest {
             assertEquals(expect[i], r.removeKdigits(input[i], k[i]));
         }
     }
+    @Test
+    void removeKdigitsMonotoneStack() {
+        for (int i = 0; i < input.length; i++) {
+            assertEquals(expect[i], r.removeKdigitsMonotoneStack(input[i], k[i]));
+        }
+    }
 }

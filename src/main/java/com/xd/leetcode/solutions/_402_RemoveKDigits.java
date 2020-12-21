@@ -1,5 +1,7 @@
 package com.xd.leetcode.solutions;
 
+import java.util.LinkedList;
+
 public class _402_RemoveKDigits {
     public String removeKdigits(String num, int k) {
         int n = num.length();
@@ -31,6 +33,43 @@ public class _402_RemoveKDigits {
                 }
             }
             sb.append(min);
+        }
+        return sb.toString();
+    }
+    public String removeKdigitsMonotoneStack(String num, int k) {
+        int n = num.length();
+        if (n <= k) {
+            return "0";
+        }
+        if (k == 0) {
+            return num;
+        }
+
+        LinkedList<Character> stack = new LinkedList<>();
+        int removed = 0;
+        for (int i = 0; i < n; i++) {
+            char cur = num.charAt(i);
+            // 如果栈不为空 && 栈顶数字比当前数字大 && 还没删够 则出栈，让更小的数字在栈中找到合适位置
+            while (!stack.isEmpty() && stack.getLast() > cur && removed < k) {
+                stack.removeLast();
+                removed++;
+            }
+            // 否则压栈
+            stack.add(cur);
+        }
+        int remain = k - removed;
+        // "112" 1 这种需要删除的字符在后面
+        while (remain > 0) {
+            stack.removeLast();
+            remain--;
+        }
+        // 删除前导0，注意单"0"的情况不要删
+        while (stack.getFirst() == '0' && stack.size() > 1) {
+            stack.removeFirst();
+        }
+        StringBuilder sb = new StringBuilder();
+        for (char c : stack) {
+            sb.append(c);
         }
         return sb.toString();
     }
