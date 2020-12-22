@@ -42,11 +42,11 @@ public class _103_BinaryTreeZigzagLevelOrderTraversal {
         while (!queue1.isEmpty()) {
             TreeNode top = queue1.removeFirst();
             levelResult.add(top.val);
-            if (top.left != null) {
-                queue2.addLast(top.left);
-            }
             if (top.right != null) {
-                queue2.addLast(top.right);
+                queue2.addFirst(top.right);
+            }
+            if (top.left != null) {
+                queue2.addFirst(top.left);
             }
         }
         return levelResult;
