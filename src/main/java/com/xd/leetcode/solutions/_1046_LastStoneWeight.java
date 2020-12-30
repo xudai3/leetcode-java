@@ -48,10 +48,17 @@ public class _1046_LastStoneWeight {
             s1 = getNext(cnt, s1);
             s2 = getNext(cnt, s2);
             if (s1 > 0 && s2 > 0) {
-                if (s1 == s2) {
-                    
+                if (s1 != s2) {
+                    cnt[Math.abs(s1-s2)]++;
                 }
+            } else {
+                break;
             }
+        }
+        if (s1 != 0) {
+            return s1;
+        } else {
+            return 0;
         }
     }
     public int getNext(int[] a, int idx) {

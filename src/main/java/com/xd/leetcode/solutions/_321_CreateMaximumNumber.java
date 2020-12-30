@@ -38,6 +38,6 @@ package com.xd.leetcode.solutions;
 
 public class _321_CreateMaximumNumber {
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
-
+        return new int[]{};
     }
 }
