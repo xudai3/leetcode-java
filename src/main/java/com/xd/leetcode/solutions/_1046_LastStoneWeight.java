@@ -1,5 +1,7 @@
 package com.xd.leetcode.solutions;
 
+import java.util.PriorityQueue;
+
 /**
  * 有一堆石头，每块石头的重量都是正整数。
  *
@@ -30,6 +32,20 @@ package com.xd.leetcode.solutions;
  */
 
 public class _1046_LastStoneWeight {
+    public int lastStoneWeightWithMaxHeap(int[] stones) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> b - a);
+        for (int stone : stones) {
+            pq.offer(stone);
+        }
+        while (pq.size() > 1) {
+            int s1 = pq.poll();
+            int s2 = pq.poll();
+            if (s1 != s2) {
+                pq.offer(s1 - s2);
+            }
+        }
+        return pq.isEmpty() ? 0 : pq.poll();
+    }
     public int lastStoneWeight(int[] stones) {
         int n = stones.length;
         if (n == 0) {
@@ -42,6 +58,12 @@ public class _1046_LastStoneWeight {
         for (int i = 0; i < n; i++) {
             cnt[stones[i]]++;
         }
+        // 预处理两两抵消的同质量石头好像并没有变快
+//        for (int i = 0; i < n; i++) {
+//            if (cnt[i] > 2) {
+//                cnt[i] %= 2;
+//            }
+//        }
         int s1 = 1000;
         int s2 = 1000;
         while (true) {
@@ -49,7 +71,7 @@ public class _1046_LastStoneWeight {
             s2 = getNext(cnt, s2);
             if (s1 > 0 && s2 > 0) {
                 if (s1 != s2) {
-                    cnt[Math.abs(s1-s2)]++;
+                    cnt[s1-s2]++;
                 }
             } else {
                 break;
