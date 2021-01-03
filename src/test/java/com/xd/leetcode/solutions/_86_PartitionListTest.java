@@ -24,11 +24,21 @@ public class _86_PartitionListTest {
     }
 
     @Test
-    void partition() {
+    void partitionTwoPointer() {
         for (int i = 0; i < nodeArr.length; i++) {
             ListNode h1 = u.buildSinglyLinkedList(nodeArr[i]);
             ListNode h2 = u.buildSinglyLinkedList(expectArr[i]);
-            h1 = p.partition(h1, valArr[i]);
+            h1 = p.partitionTwoPointer(h1, valArr[i]);
+            assertEquals(true, u.linkedListEquals(h1, h2));
+        }
+    }
+
+    @Test
+    void partitionTwoLinkedList() {
+        for (int i = 0; i < nodeArr.length; i++) {
+            ListNode h1 = u.buildSinglyLinkedList(nodeArr[i]);
+            ListNode h2 = u.buildSinglyLinkedList(expectArr[i]);
+            h1 = p.partitionTwoLinkedList(h1, valArr[i]);
             assertEquals(true, u.linkedListEquals(h1, h2));
         }
     }

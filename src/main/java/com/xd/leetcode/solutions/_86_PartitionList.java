@@ -13,16 +13,43 @@ package com.xd.leetcode.solutions;
  */
 public class _86_PartitionList {
     /**
+     * 用两个链表，small存储所有小于x的节点，big存储所有大于等于x的节点
+     * 最后合并两个链表，small在big前面拼起来就行
+     * 为了方便处理small和big都加上虚拟头节点
+     * @param head
+     * @param x
+     * @return
+     */
+    public ListNode partitionTwoLinkedList(ListNode head, int x) {
+        ListNode smallHead = new ListNode(0);
+        ListNode small = smallHead;
+        ListNode bigHead = new ListNode(0);
+        ListNode big = bigHead;
+        while (head != null) {
+            if (head.val < x) {
+                small.next = head;
+                small = small.next;
+            } else {
+                big.next = head;
+                big = big.next;
+            }
+            head = head.next;
+        }
+        big.next = null;
+        small.next = bigHead.next;
+        return smallHead.next;
+    }
+    /**
      * 两个指针，p1指针找到第一个大于等于x的节点，p2指针从p1后面开始遍历所有节点
-     * 遇到比x小的节点就换到p1前面去
-     * 由于给的是单链表，所以挪动节点时需要p1,p2的前面节点信息
+     * 遇到比x小的节点就挪到p1前面去
+     * 由于给的是单链表，所以为了挪动节点时方便需要记录p1,p2的前节点
      * p1的话可以通过给链表头前面插入一个新的头节点，用p1记录前节点，p1.next来找第一个大于等于x的节点
      * p2的话用prev2=p1，p1=prev2.next来开始找所有小于x的节点
      * @param head
      * @param x
      * @return
      */
-    public ListNode partition(ListNode head, int x) {
+    public ListNode partitionTwoPointer(ListNode head, int x) {
         if (head == null) {
             return head;
         }
