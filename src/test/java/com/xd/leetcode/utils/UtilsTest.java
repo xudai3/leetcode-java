@@ -1,5 +1,6 @@
 package com.xd.leetcode.utils;
 
+import com.xd.leetcode.solutions.ListNode;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,6 +14,25 @@ class UtilsTest {
 
     public UtilsTest() {
         u = new Utils();
+    }
+
+    @Test
+    void buildSinglyLinkedList() {
+        int[] arr = new int[]{1,4,3,2,5,2};
+        ListNode head = u.buildSinglyLinkedList(arr);
+        u.printLinkedList(head);
+    }
+
+    @Test
+    void linkedListEquals() {
+        int[] arr1 = new int[]{1,4,3,2,5,2};
+        int[] arr2 = new int[]{1,4,3,2,5,2};
+        int[] arr3 = new int[]{1,4,3,2,5,3};
+        ListNode h1 = u.buildSinglyLinkedList(arr1);
+        ListNode h2 = u.buildSinglyLinkedList(arr2);
+        ListNode h3 = u.buildSinglyLinkedList(arr3);
+        assertEquals(true, u.linkedListEquals(h1, h2));
+        assertEquals(false, u.linkedListEquals(h1, h3));
     }
 
     @Test
