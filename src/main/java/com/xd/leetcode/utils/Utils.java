@@ -45,6 +45,28 @@ public class Utils {
         }
     }
 
+    public boolean intArrayEquals(int[] nums1, int[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if (len1 != len2) {
+            return false;
+        }
+        for (int i = 0; i < len1; i++) {
+            if (nums1[i] != nums2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String intArrayToString(int[] nums) {
+        String str = "";
+        for (int num : nums) {
+            str += num;
+        }
+        return str;
+    }
+
     public TreeNode buildTree(Integer[] treeNodeVals) {
         int n = treeNodeVals.length;
         int idx = 0;

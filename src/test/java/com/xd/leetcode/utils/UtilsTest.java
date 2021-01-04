@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UtilsTest {
     Utils u;
@@ -55,5 +55,14 @@ class UtilsTest {
         list4.add(Arrays.asList(1,2,3,4,5));
         list4.add(Arrays.asList(6,7,8,9,0));
         assertEquals(false,u.twoDArrayListEquals(list3, list4));
+    }
+
+    @Test
+    void intArrayEquals() {
+        int[] arr1 = new int[]{1,4,3,2,5,2};
+        int[] arr2 = new int[]{1,4,3,2,5,2};
+        int[] arr3 = new int[]{1,4,3,2,5,3};
+        assertTrue(u.intArrayEquals(arr1, arr2));
+        assertFalse(u.intArrayEquals(arr1, arr3));
     }
 }
