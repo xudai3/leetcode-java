@@ -43,10 +43,19 @@ import java.util.stream.Collectors;
  */
 
 public class _321_CreateMaximumNumber {
+    /**
+     * 分别从nums1和nums2取i和j个数的最大子序列，再组合成一个最大的数
+     * 遍历所有有i+j=k的情况，再从这些情况组成的所有数中找到最大的那一个
+     * @param nums1
+     * @param nums2
+     * @param k
+     * @return
+     */
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> sequences = new ArrayList<>();
         int len1 = nums1.length;
         int len2 = nums2.length;
+        // 遍历i+j=k
         for (int i = 0; i <= len1; i++) {
             int j = k - i;
             if (j > len2 || i > k) {
@@ -84,6 +93,7 @@ public class _321_CreateMaximumNumber {
         int len2 = nums2.length;
         int[] newArr = new int[len1 + len2];
         for (int idx = 0; idx < len1+len2; idx++) {
+            // 合并的时候每次取数组前面最大的那个数字，如果相等的话则需要继续向后比较
             if (compareArr(nums1, i, nums2, j) > 0) {
                 newArr[idx] = nums1[i++];
             } else {
@@ -129,6 +139,7 @@ public class _321_CreateMaximumNumber {
             for (int j = 0; j < len; j++) {
                 numStr += sequence.get(j);
             }
+            // 有的case已经超过了long的范围，所以需要自己进行比较，这里使用转换成字符串再比较的方法
             if (compareStr(numStr, max) > 0) {
                 max = numStr;
                 idx = i;
