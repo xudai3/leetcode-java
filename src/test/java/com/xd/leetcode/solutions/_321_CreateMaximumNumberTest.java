@@ -34,7 +34,7 @@ class _321_CreateMaximumNumberTest {
     @Test
     void getMaxSequence() {
         int[] input = new int[]{5, 4, 8, 3};
-        int[] output = c.getMaxSubSequence(input, 3);
+        int[] output = c.maxSubsequence(input, 3);
         System.out.println(Arrays.toString(output));
     }
 
@@ -42,7 +42,7 @@ class _321_CreateMaximumNumberTest {
     void mergeSubSequence() {
         int[] nums1 = new int[]{6};
         int[] nums2 = new int[]{9, 5, 8, 3};
-        int[] output = c.mergeSubSequence(nums1, nums2);
+        int[] output = c.merge(nums1, nums2);
         System.out.println(Arrays.toString(output));
     }
 }
