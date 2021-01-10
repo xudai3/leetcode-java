@@ -59,6 +59,20 @@ public class Utils {
         return true;
     }
 
+    public boolean stringArrayEquals(String[] nums1, String[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if (len1 != len2) {
+            return false;
+        }
+        for (int i = 0; i < len1; i++) {
+            if (nums1[i].equals(nums2[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public String intArrayToString(int[] nums) {
         String str = "";
         for (int num : nums) {
