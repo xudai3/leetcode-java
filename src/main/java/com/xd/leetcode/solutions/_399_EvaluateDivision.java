@@ -48,6 +48,7 @@ import java.util.List;
  */
 public class _399_EvaluateDivision {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        return new double[]{};
     }
     private class UnionFind {
         private int[] parent;
