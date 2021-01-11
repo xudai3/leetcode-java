@@ -3,6 +3,8 @@ package com.xd.leetcode.utils;
 import com.xd.leetcode.solutions.ListNode;
 import com.xd.leetcode.solutions.TreeNode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -57,6 +59,29 @@ public class Utils {
             }
         }
         return true;
+    }
+
+    public boolean doubleArrayEquals(double[] nums1, double[] nums2) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        if (len1 != len2) {
+            return false;
+        }
+        for (int i = 0; i < len1; i++) {
+            if (nums1[i] != nums2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public List<List<String>> twoDStringArrayToList(String[][] arr) {
+        int n = arr.length;
+        List<List<String>> result = new ArrayList<>(n);
+        for (int i = 0; i < n; i++) {
+            result.add(new ArrayList<>(Arrays.asList(arr[i])));
+        }
+        return result;
     }
 
     public boolean stringArrayEquals(String[] nums1, String[] nums2) {

@@ -65,4 +65,22 @@ class UtilsTest {
         assertTrue(u.intArrayEquals(arr1, arr2));
         assertFalse(u.intArrayEquals(arr1, arr3));
     }
+
+    @Test
+    void doubleArrayEquals() {
+        double[] arr1 = new double[]{1.0, 2.0, -1.0};
+        double[] arr2 = new double[]{1.0, 2.0, -1.0};
+        double[] arr3 = new double[]{1.00, 2.0, -1.0};
+        double[] arr4 = new double[]{1.75, 2.0, -1.0};
+        assertTrue(u.doubleArrayEquals(arr1, arr2));
+        assertTrue(u.doubleArrayEquals(arr1, arr3));
+        assertFalse(u.doubleArrayEquals(arr1, arr4));
+    }
+
+    @Test
+    void twoDStringArrayToList() {
+        String[][] arr = new String[][]{{"a", "b"}, {"c", "d"}};
+        List result = u.twoDStringArrayToList(arr);
+        System.out.println(result.toString());
+    }
 }

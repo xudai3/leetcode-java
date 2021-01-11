@@ -1,5 +1,6 @@
 package com.xd.leetcode.solutions;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -48,7 +49,35 @@ import java.util.List;
  */
 public class _399_EvaluateDivision {
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
-        return new double[]{};
+        int equationLen = equations.size();
+        int queryLen = queries.size();
+        UnionFind uf = new UnionFind(2 * equationLen);
+        HashMap<String, Integer> hash = new HashMap<>(2 * equationLen);
+        double[] result = new double[queryLen];
+        int idx = 0;
+        for (int i = 0; i < equationLen; i++) {
+            String str1 = equations.get(i).get(0);
+            String str2 = equations.get(i).get(1);
+            if (!hash.containsKey(str1)) {
+                hash.put(str1, idx);
+                idx++;
+            }
+            if (!hash.containsKey(str2)) {
+                hash.put(str2, idx);
+                idx++;
+            }
+            uf.union(hash.get(str1), hash.get(str2), values[i]);
+        }
+        for (int i = 0; i < queryLen; i++) {
+            String str1 = queries.get(i).get(0);
+            String str2 = queries.get(i).get(1);
+            if (!hash.containsKey(str1) || !hash.containsKey(str2)) {
+                result[i] = -1.0d;
+            } else {
+                result[i] = uf.isConnected(hash.get(str1), hash.get(str2));
+            }
+        }
+        return result;
     }
     private class UnionFind {
         private int[] parent;
@@ -68,18 +97,24 @@ public class _399_EvaluateDivision {
                 return;
             }
             parent[rootP] = rootQ;
-            weight[rootP] = weight[q] * val / weight[rootQ];
+            weight[rootP] = weight[q] * val / weight[p];
         }
         public int find(int x) {
-            while (parent[x] != x) {
-                x = parent[x];
+            if (parent[x] != x) {
+                int origin = parent[x];
+                parent[x] = find(parent[x]);
+                weight[x] *= weight[origin];
             }
-            return x;
+            return parent[x];
         }
-        public boolean connected(int p, int q) {
+        public double isConnected(int p, int q) {
             int rootP = find(p);
             int rootQ = find(q);
-            return rootP == rootQ;
+            if (rootP == rootQ) {
+                return weight[p] / weight[q];
+            } else {
+                return -1.0d;
+            }
         }
     }
 }
