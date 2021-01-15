@@ -28,33 +28,74 @@ package com.xd.leetcode.solutions;
  *
  */
 public class _74_SearchA2dMatrix {
+
+    /**
+     * 这个升序规律可以看成升序的一维数组进行二分查找
+     * row = idx / n
+     * col = idx % n
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrix2(int[][] matrix, int target) {
+        int rowLen = matrix.length;
+        if (rowLen == 0) {
+            return false;
+        }
+        int colLen = matrix[0].length;
+        if (colLen == 0) {
+            return false;
+        }
+        if (target < matrix[0][0] || target > matrix[rowLen-1][colLen-1]) {
+            return false;
+        }
+        int left = 0;
+        int right = rowLen * colLen - 1;
+        while (left <= right) {
+            int pivot = left + ((right - left) >> 1);
+            int row = pivot / colLen;
+            int col = pivot % colLen;
+            if (matrix[row][col] == target) {
+                return true;
+            } else if (matrix[row][col] > target) {
+                right = pivot - 1;
+            } else {
+                left = pivot + 1;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 从左到右，从上到下都是越来越大，所以从右上角开始，如果matrix[i][j]小于target则i++，大于则j--
+     * @param matrix
+     * @param target
+     * @return
+     */
     public boolean searchMatrix(int[][] matrix, int target) {
-        int m = matrix.length;
-        int n = matrix[0].length;
-        if (target < matrix[0][0] || target > matrix[m-1][n-1]) {
+        int rowLen = matrix.length;
+        if (rowLen == 0) {
+            return false;
+        }
+        int colLen = matrix[0].length;
+        if (colLen == 0) {
+            return false;
+        }
+        if (target < matrix[0][0] || target > matrix[rowLen-1][colLen-1]) {
             return false;
         }
         int i = 0;
-        int j = 0;
-        while (i < m - 1 && j < n - 1) {
+        int j = colLen - 1;
+        while (i < rowLen && j >= 0) {
             if (matrix[i][j] == target) {
                 return true;
-            }
-            int right = matrix[i][j+1];
-            if (target < right) {
-                return false;
-            }
-            int down = matrix[i+1][j];
-            if (down <= target) {
+            } else if (matrix[i][j] < target) {
                 i++;
-            } else {
-                j++;
+            } else if (matrix[i][j] > target) {
+                j--;
             }
         }
-        if (matrix[i][j] == target) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 }
