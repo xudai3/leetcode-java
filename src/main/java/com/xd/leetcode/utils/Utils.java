@@ -30,6 +30,15 @@ public class Utils {
         System.out.println("null");
     }
 
+    public void print2DIntArray(int[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
+                System.out.printf("%d ", arr[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
     public boolean linkedListEquals(ListNode head1, ListNode head2) {
         ListNode p1 = head1;
         ListNode p2 = head2;
