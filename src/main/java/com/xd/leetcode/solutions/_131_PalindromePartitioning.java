@@ -1,8 +1,5 @@
 package com.xd.leetcode.solutions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。
  *
@@ -24,8 +21,8 @@ public class _131_PalindromePartitioning {
      * @param s
      * @return
      */
-    public List<List<String>> partition(String s) {
-        List<List<String>> res = new ArrayList<>();
-
-    }
+//    public List<List<String>> partition(String s) {
+//        List<List<String>> res = new ArrayList<>();
+//
+//    }
 }
